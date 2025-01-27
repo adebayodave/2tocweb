@@ -109,6 +109,33 @@
         .button-container button:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+        @media (max-width: 768px) {
+    /* Adjust the height of the 80% section cards for small devices */
+    .card-background {
+        height: 300px; /* Increase the height for smaller screens */
+    }
+
+    .card-content {
+        padding: 15px; /* Adjust padding for smaller cards */
+    }
+
+    .logo-card {
+        position: fixed;
+        top: 30%;
+        left: 40px;
+        transform: translateX(-50%);
+        z-index: 999; /* Ensure it appears above other elements */
+        width: auto; /* Adjust width for smaller screens if needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .logo-card img {
+        
+        max-height: 300px; /* Resize logo for smaller devices */
+        width: auto; /* Maintain aspect ratio */
+    }
+}
+
 
     </style>
 </head>
