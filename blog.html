@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+        .blog-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .popular-post {
+            transition: background-color 0.3s;
+        }
+        .popular-post:hover {
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+   <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #d4f7d4; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://2tocsolutions.ng/assets/logo.png" alt="2TOC Solutions Logo" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="service.html" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                        <li><a class="dropdown-item" href="#">Software as a Serving (SaaS)</a></li>
+                        <li><a class="dropdown-item" href="#">Software gateway system</a></li>
+                        <li><a class="dropdown-item" href="#">Mobile application</a></li>
+                        <li><a class="dropdown-item" href="#">SCADA</a></li>
+                        <li><a class="dropdown-item" href="#">Telecommunications (VAS)</a></li>
+                        <li><a class="dropdown-item" href="#">Fire Extinguisher Integrity management</a></li>
+                        <li><a class="dropdown-item" href="#">Fire Alert System (SMOKCOMM)</a></li>
+                        <li><a class="dropdown-item" href="#">R&D</a></li>
+                    </ul>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="blog.html">Blog</a>
+                </li>
+                
+            </ul>
+            <button type="button" class="btn btn-outline-danger  me-3" data-bs-toggle="modal"
+            data-bs-target="#contactModal">
+            Contact Us
+        </button>
+        </div>
+    </div>
+</nav>
+
+    <div class="container py-4 mt-5">
+        <!-- Blog Header -->
+        <div class="text-center mb-4">
+            <h1 class="display-4">Blog</h1>
+            <p class="lead">Must Read Post</p>
+        </div>
+
+        <!-- Featured Posts Carousel -->
+        <div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner rounded">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80" class="d-block w-100" alt="Featured Post 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&q=80" class="d-block w-100" alt="Featured Post 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" class="d-block w-100" alt="Featured Post 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <!-- Search Box -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Posts -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Popular Post</h5>
+                        <div class="popular-post p-2 rounded mb-2">Popular Post 1</div>
+                        <div class="popular-post p-2 rounded mb-2">Popular Post 2</div>
+                        <div class="popular-post p-2 rounded mb-2">Popular Post 3</div>
+                        <div class="popular-post p-2 rounded">Popular Post 4</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <!-- Blog Posts -->
+                    <div class="col">
+                        <div class="card h-100 blog-card">
+                            <img src="https://images.unsplash.com/photo-1500000000001?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blog Post 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Blog Post 1</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 blog-card">
+                            <img src="https://images.unsplash.com/photo-1500000000002?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blog Post 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Blog Post 2</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 blog-card">
+                            <img src="https://images.unsplash.com/photo-1500000000003?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blog Post 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Blog Post 3</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 blog-card">
+                            <img src="https://images.unsplash.com/photo-1500000000004?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blog Post 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Blog Post 4</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 blog-card">
+                            <img src="https://images.unsplash.com/photo-1500000000005?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blog Post 5">
+                            <div class="card-body">
+                                <h5 class="card-title">Blog Post 5</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 blog-card">
+                            <img src="https://images.unsplash.com/photo-1500000000006?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Blog Post 6">
+                            <div class="card-body">
+                                <h5 class="card-title">Blog Post 6</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+   <!-- Footer Section -->
+   <footer class="text-white py-5" style="background-color: #2c3e50;">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and Name -->
+            <div class="col-md-4 mb-4 text-center text-md-start">
+                <img src="https://2tocsolutions.ng/assets/logo-main.png" alt="Company Logo" style="height: 50px;" class="mb-2">
+                <h5 class="mt-2">2TOCSOLUTIONS LTD.</h5>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-md-4 mb-4 text-center">
+                <h5>Contact Us</h5>
+                <p>Email: <a href="info@2tocsolutions.com"
+                        class="text-white text-decoration-none">info@2tocsolutions.com</a></p>
+                <p>Call: <a href="tel:+1234567890" class="text-white text-decoration-none">+234 809 994 9994</a>
+                </p>
+                <p>Address:Abuja: Suite 2, House 5, Rahinna Close, Aco Estate, Airport Road Abuja.</p>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="col-md-4 mb-4 text-center text-md-end">
+                <h5>Follow Us</h5>
+                <a href="https://facebook.com" target="_blank" class="text-white mx-2"><i class="bi bi-facebook"
+                        style="font-size: 1.5rem;"></i></a>
+                <a href="https://youtube.com" target="_blank" class="text-white mx-2"><i class="bi bi-youtube"
+                        style="font-size: 1.5rem;"></i></a>
+                <a href="https://instagram.com" target="_blank" class="text-white mx-2"><i
+                        class="bi bi-instagram" style="font-size: 1.5rem;"></i></a>
+                <a href="https://twitter.com" target="_blank" class="text-white mx-2"><i class="bi bi-twitter"
+                        style="font-size: 1.5rem;"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="text-white mx-2"><i class="bi bi-linkedin"
+                        style="font-size: 1.5rem;"></i></a>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-light">
+
+        <div class="row align-items-center">
+            <!-- Copyright -->
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <p class="mb-0">&copy; 2025 Company Name. All rights reserved.</p>
+            </div>
+
+            <!-- Staff Login Button -->
+            <div class="col-md-6 text-center text-md-end">
+                <a href="/staff-login" class="btn btn-outline-light btn-sm">Staff Login</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<!-- Contact Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+     <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ </div>
+ <form>
+     <div class="modal-body">
+         <!-- Contact Form -->
+         <div class="mb-3">
+             <label for="name" class="form-label">Name</label>
+             <input type="text" class="form-control" id="name" placeholder="Your Name">
+         </div>
+         <div class="mb-3">
+             <label for="email" class="form-label">Email</label>
+             <input type="email" class="form-control" id="email" placeholder="Your Email">
+         </div>
+         <div class="mb-3">
+             <label for="message" class="form-label">Message</label>
+             <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+         </div>
+     </div>
+     <div class="modal-footer">
+         <button type="submit" class="btn btn-primary">Send Mail</button>
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     </div>
+ </form>
+</div>
+</div>
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

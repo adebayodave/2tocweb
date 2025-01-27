@@ -3,226 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2TOCSOLUTIONS</title>
+    <title>Two Sections Layout with Auto Sliding Cards</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .main-content {
-            min-height: 85vh;
+        .card-background {
+            /* background-image: url('https://via.placeholder.com/800x400'); Add your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+        }
+        .card-content {
+            color: white;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+        }
+        .btn-transparent {
+            background-color: transparent;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-transparent:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .logo-card {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .logo-card img {
             width: 100%;
-            margin: 0 auto;
+            max-width: 100%;
+            height: 80px;
+            animation: rotateLogo 5s infinite linear;
         }
-        
-        @media (min-width: 768px) {
-            .main-content {
-                flex-direction: row;
+
+        @keyframes rotateLogo {
+            0% {
+                transform: rotateY(0deg);
             }
-        }
-
-        .content-left {
-            background-color: #f8f9fa;
-            flex: 1;
-            min-height: 500px;
-        }
-
-        .content-right {
-            background-color: rgb(212,248,212);
-            overflow: hidden;
-            position: relative;
-            min-height: 500px;
-        }
-
-        @media (min-width: 768px) {
-            .content-left {
-                width: 75%;
-                min-height: 85vh;
+            100% {
+                transform: rotateY(360deg);
             }
-            
-            .content-right {
-                width: 25%;
-                min-height: 85vh;
-            }
-        }
-
-        .carousel-item {
-            animation: slide 30s linear infinite;
         }
 
         .card-container {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        /* 20% Width Section */
+        .sliding-card-container {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+        }
+
+        .sliding-card-wrapper {
+            display: flex;
+            flex-direction: column;
+            transition: transform 2s ease-in-out;
+            height: 100%;
+        }
+
+        .sliding-card-wrapper .card {
+        width: 90%; /* Slightly smaller width */
+        height: 47.5%; /* Reduce height to 45% of the container */
+        flex-shrink: 0;
+        margin: 0 auto 10px; /* Center the card and add space between */
+        overflow: hidden; /* Prevent card overflow */
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+        .button-container {
             position: absolute;
-            animation: slideUp 30s linear infinite;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
-        .content-right .card .card-body {
-            height: 60%;
-            padding: 0.5rem;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .content-right .card .card-body p{
-            font-size: small;
-            font-weight: bold;
-        }
-
-        .content-right .card img {
-            height: 40%;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .card-btn {
-            color: #3F9C13;
-            border: 1px solid #3F9C13;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 0.5rem;
-        }
-
-        .card-btn:hover {
-            background-color: #3F9C13;
+        .button-container button {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        .carousel-inner {
-            height: 100%;
+        .button-container button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
-        .carousel-item {
-            height: 100%;
-        }
-
-        .carousel-item .d-flex {
-            flex-direction: column;
-            gap: 1rem;
-            height: auto;
-        }
-
-        @media (min-width: 768px) {
-            .carousel-item .d-flex {
-                flex-direction: row;
-                gap: 1rem;
-                height: 100%;
-            }
-        }
-
-        .card {
-            width: 100%;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            margin-bottom: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .card {
-                height: 100%;
-                margin-bottom: 0;
-            }
-        }
-
-        .card-body {
-            background: rgba(0, 0, 0, 0.5);
-            height: auto;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 1rem;
-        }
-
-        .card img {
-            height: 80%;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .card-title {
-            color: rgb(212,248,212);
-            margin-bottom: 0.5rem;
-        }
-
-        .read-more-btn {
-            background: none;
-            border: 1px solid white;
-            color: white;
-            font-size: 0.875rem;
-            font-weight: 500;
-            padding: 0.375rem 0.75rem;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border-radius: 4px;
-            margin-top: 0.5rem;
-            width: fit-content;
-        }
-
-        .read-more-btn:hover {
-            background: white;
-            color: #3F9C13;
-        }
-
-        @keyframes slideUp {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-100%);
-            }
-        }
-
-        /* Hide carousel controls */
-        .carousel-control-prev,
-        .carousel-control-next {
-            display: none;
-        }
-
-        #logoCarousel .carousel-item img {
-            height: 100px;
-            object-fit: contain;
-        }
-
-        .certification-section img {
-            max-width: 150px;
-            height: auto;
-        }
-
-        /* Add styles for partners carousel */
-        #logoCarousel .carousel-item {
-            transition: transform .6s ease-in-out;
-        }
-        
-        #logoCarousel .carousel-item img {
-            height: 100px;
-            object-fit: contain;
-            margin: 0 20px;
-        }
-
-        #logoCarousel .carousel-control-prev,
-        #logoCarousel .carousel-control-next {
-            width: 5%;
-            display: none;
-        }
-
-        .partner-logo {
-            max-width: 150px;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .partner-logo:hover {
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
@@ -230,100 +117,288 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #d4f7d4; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="https://2tocsolutions.ng/assets/logo.png" alt="Logo" width="40" height="40">
-                <span style="font-weight: bold;">2TOCSOLUTION</span>
+                <img src="https://2tocsolutions.ng/assets/logo.png" alt="2TOC Solutions Logo" height="40"> <span style="font-size: large; font-weight: bold;">2TOCSOLUTIONS LTD.</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto" style="font-size: larger; font-weight: bold;">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery">Gallery</a></li>
+                <ul class="navbar-nav ms-auto" style="font-weight: bold;">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="service.html" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="#">Software as a Serving (SaaS)</a></li>
+                            <li><a class="dropdown-item" href="#">Software gateway system</a></li>
+                            <li><a class="dropdown-item" href="#">Mobile application</a></li>
+                            <li><a class="dropdown-item" href="#">SCADA</a></li>
+                            <li><a class="dropdown-item" href="#">Telecommunications (VAS)</a></li>
+                            <li><a class="dropdown-item" href="#">Fire Extinguisher Integrity management</a></li>
+                            <li><a class="dropdown-item" href="#">Fire Alert System (SMOKCOMM)</a></li>
+                            <li><a class="dropdown-item" href="#">R&D</a></li>
+                        </ul>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    
                 </ul>
                 <button type="button" class="btn btn-outline-danger  me-3" data-bs-toggle="modal"
-                    data-bs-target="#contactModal">
-                    Contact Us
-                </button>
+                data-bs-target="#contactModal">
+                Contact Us
+            </button>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container-fluid" style="margin-top: 90px;">
-        <div class="main-content">
-            <!-- Left Section -->
-            <div class="content-left">
-                <div id="carouselExample" class="carousel slide h-100" data-bs-ride="carousel">
-                    <div class="carousel-inner h-100">
-                        <!-- First Row -->
-                        <div class="carousel-item active">
-                            <div class="d-flex h-100">
-                                <div class="card" style="background-image: url('https://fontsarena.com/wp-content/uploads/2024/12/Payment-Gateway-Software-Development.jpeg');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Software gateway system</h5>
-                                        <a href="#"  class="read-more-btn">Read More</a>
+    <!-- Content Below Navbar -->
+    <div class="container mt-5 mb-5 pt-5" style="background-color: white;">
+        <div class="row">
+            <!-- 85% Width Section -->
+            <div class="col-md-8">
+                <div class="p-3" style="background-color: #f0f0f0; max-height: 85vh; overflow-y: auto;">
+                    <div class="card-container">
+                        <!-- First Row: 3 Cards -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(asset/nfec.gif);">
+                                        <div class="card-content">
+                                            <p>Fire Extinguisher Integrity management.</p>
+                                            <a href="https://www.nfec.com.ng/" class="btn-transparent">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card" style="background-image: url('asset/nfec.gif');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Fire Extinguisher Integrity management</h5>
-                                        <a href="https://www.nfec.com.ng/" class="read-more-btn">Read More</a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(https://fontsarena.com/wp-content/uploads/2024/12/Payment-Gateway-Software-Development.jpeg);">
+                                        <div class="card-content">
+                                            <p>Software gateway system.</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(asset/sas.gif);">
+                                        <div class="card-content">
+                                            <p>Software as a Serving (SaaS).</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Second Row -->
-                        <div class="carousel-item">
-                            <div class="d-flex h-100">
-                                <div class="card" style="background-image: url('asset/sas.gif');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Software as a Service (SaaS)</h5>
-                                        <a href="#" class="read-more-btn">Read More</a>
+
+                        <!-- Second Row: 2 Cards + Logo -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(https://g2netnigeria.com/wp-content/uploads/2021/01/Mobile-App-Dev.png);">
+                                        <div class="card-content">
+                                            <p>Mobile application (Android, IOS e.t.c).</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card" style="background-image: url('https://enterpriseviewpoint.com/wp-content/uploads/2020/11/Mobile-App.png');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Mobile application</h5>
-                                        <a href="#" class="read-more-btn">Read More</a>
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- Logo Card -->
+                                <div class="logo-card">
+                                    <img src="https://2tocsolutions.ng/assets/logo-main.png" alt="Logo">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(https://avencom.com/wp-content/uploads/2019/07/vcx3.jpg);">
+                                        <div class="card-content">
+                                            <p>Supervisory Control and Dada Acquisition (SCADA).</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Third Row -->
-                        <div class="carousel-item">
-                            <div class="d-flex h-100">
-                                <div class="card" style="background-image: url('https://www.e-spincorp.com/wp-content/uploads/2018/09/scadasystem.img_-1024x732.png');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Supervisory Control and Data Acquisition (SCADA)</h5>
-                                        <a href="#" class="read-more-btn">Read More</a>
+
+                        <!-- Third Row: 3 Cards -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(asset/telecommunications.jpg);">
+                                        <div class="card-content">
+                                            <p>Telecommunications (Value Added Service) VAS.</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card" style="background-image: url('asset/telecom_pics.jpeg');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Telecommunications (Value Added Service) VAS</h5>
-                                        <a href="#" class="read-more-btn">Read More</a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(https://img.freepik.com/premium-photo/home-safety-smoke-detector-ceiling-detecting-house-fire_1028938-45092.jpg);">
+                                        <div class="card-content">
+                                            <p>Fire Alert System (SMOKCOMM).</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-background" style="background-image: url(https://us.fi-group.com/wp-content/uploads/sites/16/2024/09/rD-article.jpg);">
+                                        <div class="card-content">
+                                            <p>R&D. (Research and Development)</p>
+                                            <a href="#" class="btn-transparent">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Fourth Row -->
-                        <div class="carousel-item">
-                            <div class="d-flex h-100">
-                                <div class="card" style="background-image: url('https://img.freepik.com/premium-photo/home-safety-smoke-detector-ceiling-detecting-house-fire_1028938-45092.jpg');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Fire Alert System (SMOKCOMM)</h5>
-                                        <a href="#" class="read-more-btn">Read More</a>
-                                    </div>
+                    </div>
+                </div>
+
+                <!-- Section with Header -->
+<div class="container">
+    <h2 class="text-center mb-4" style="color: #3F9C13;">Our Partners</h2>
+
+    <!-- Logo Slider -->
+    <div id="logoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner d-flex align-items-center">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/interior-1.png" class="img-fluid" alt="Logo 1" style="height: 100px;">
+                    <img src="asset/client-2.png" class="img-fluid" alt="Logo 2" style="height: 100px;">
+                    <img src="asset/client-3.png" class="img-fluid" alt="Logo 3" style="height: 100px;">
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/nitda.jpg" class="img-fluid" alt="Logo 4" style="height: 100px;">
+                    <img src="asset/client-3.png" class="img-fluid" alt="Logo 5" style="height: 100px;">
+                    <img src="asset/interior-1.png" class="img-fluid" alt="Logo 6" style="height: 100px;">
+                </div>
+            </div>
+            <!-- Slide 3
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-2.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-22.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-23.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-1.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-2.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-26.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/nitda.jpg" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-3.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-2.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-30.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-31.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-32.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-33.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-34.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-35.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-4.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-5.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-6.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-7.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-8.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="res/client-36.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <img src="asset/client-37.png" class="img-fluid" alt="Logo 7" style="height: 100px;">
+                    <img src="asset/client-38.png" class="img-fluid" alt="Logo 8" style="height: 100px;">
+                    <img src="asset/client-39.png" class="img-fluid" alt="Logo 9" style="height: 100px;">
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#logoCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#logoCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+            </div>
+            
+
+            <!-- 20% Width Section with Auto Sliding Cards -->
+            <div class="col-md-4">
+                <div class="p-3" style="background-color: #d4f7d4; height: 85vh;">
+                    <!-- Sliding Cards Section -->
+                    <div class="sliding-card-container">
+                        <div class="sliding-card-wrapper">
+                            <!-- First Pair of Cards -->
+                            <div class="card">
+                                <img src="https://2tocsolutions.ng/assets/gallery/N-alerts%20commission(3).jpeg" class="card-img-top" alt="Image 1">
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: small; font-weight: bold;">Commissioning of N-Alerts infrastructure for the commencement of full operation by the Hon. Min. of Interior (Rauf Ogbeni Aregbesola) on the 12th of May, 2022..</p>
+                                    <a href="#" class="btn-transparent">Read More</a>
                                 </div>
-                                <div class="card" style="background-image: url('https://us.fi-group.com/wp-content/uploads/sites/16/2024/09/rD-article.jpg');">
-                                    <div class="card-body">
-                                        <h5 class="card-title">R&D</h5>
-                                        <a href="#" class="read-more-btn">Read More</a>
-                                    </div>
+                            </div>
+                            <div class="card">
+                                <img src="https://2tocsolutions.ng/assets/gallery/j20-2.jpg" class="card-img-top" alt="Image 2">
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: small; font-weight: bold;">The Controller General Federal Fire Service (Karebo Samson) project familiarization visit to National Fire Data Repository Centre on the 10th of January, 2022.</p>
+                                    <a href="#" class="btn-transparent">Read More</a>
+                                </div>
+                            </div>
+
+                            <!-- Second Pair of Cards -->
+                            <div class="card">
+                                <img src="https://2tocsolutions.ng/assets/gallery/34.jpg" class="card-img-top" alt="Image 3">
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: small; font-weight: bold;">FMSDIGA Stakeholders meeting with 2TOC team on the 23rd of October, 2021..</p>
+                                    <a href="#" class="btn-transparent">Read More</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="https://2tocsolutions.ng/assets/gallery/62.jpg" class="card-img-top" alt="Image 4">
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: small; font-weight: bold;">FG flag-off of Inter-Agencies training on Internal Security and Public Safety Alert System at the Nigerian Army Resource Centre Abuja on the 5th of May, 2021..</p>
+                                    <a href="#" class="btn-transparent">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -331,271 +406,128 @@
                 </div>
             </div>
 
-            <!-- Right Section -->
-            <div class="content-right">
-                <div class="card-container">
-                    <!-- Original Set of Cards -->
-                    <div class="card">
-                        <img src="https://2tocsolutions.ng/assets/gallery/N-alerts%20commission(6).jpeg" class="card-img-top" alt="Image 1">
-                        <div class="card-body">
-                            <p class="card-text">Commissioning of N-Alerts infrastructure for the commencement of full operation by the Hon. Min. of Interior (Rauf Ogbeni Aregbesola) on the 12th of May, 2022.</p>
-                            <a href="#" class="card-btn">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="https://2tocsolutions.ng/assets/gallery/40.jpg" class="card-img-top" alt="Image 2">
-                        <div class="card-body">
-                            <p class="card-text">Permanent Secretary Ministry of Interior (Dr. Shuaib Belgore) project inspection visit for the preparation of Anambra State Election monitoring at NSCDC Command and Control Centre on the 9th of September, 2021.</p>
-                            <a href="#" class="card-btn">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="https://2tocsolutions.ng/assets/gallery/60.jpg" class="card-img-top" alt="Image 3">
-                        <div class="card-body">
-                            <p class="card-text">FG flag-off of Inter-Agencies training on Internal Security and Public Safety Alert System at the Nigerian Army Resource Centre Abuja on the 5th of May, 2021.</p>
-                            <a href="#" class="card-btn">Learn More</a>
-                        </div>
-                    </div>
-                    <!-- Duplicate Set for Continuous Scroll -->
-                    <div class="card">
-                        <img src="https://2tocsolutions.ng/assets/gallery/33.jpg" class="card-img-top" alt="Image 4">
-                        <div class="card-body">
-                            <p class="card-text">FMSDIGA Stakeholders meeting with 2TOC team on the 23rd of October, 2021.</p>
-                            <a href="#" class="card-btn">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="https://2tocsolutions.ng/assets/gallery/75.jpg" class="card-img-top" alt="Image 5">
-                        <div class="card-body">
-                            <p class="card-text">Honorable Minister Federal Ministry of Communications and Digital Economy (Dr. Isa Ali Ibrahin Pantami) working visit to FFS NFDRC on the 5th of January, 2021.</p>
-                            <a href="#" class="card-btn">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="https://2tocsolutions.ng/assets/gallery/j20-2.jpg" class="card-img-top" alt="Image 6">
-                        <div class="card-body">
-                            <p class="card-text">The Controller General Federal Fire Service (Karebo Samson) project familiarization visit to National Fire Data Repository Centre on the 10th of January, 2022</p>
-                            <a href="#" class="card-btn">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
- <!-- Services Section -->
-<div class="container my-5 text-center">
-    <h2 class="mb-4" style="color: #3F9C13;">Our Services</h2>
-    <ul class="list-unstyled">
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Software as a Service (SaaS)
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Software Gateway System
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Mobile Application
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Supervisory Control and Data Acquisition (SCADA)
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Telecommunications (Value Added Service) VAS
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Fire Extinguisher Integrity Management
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Fire Alert System (SMOKCOMM)
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Research and Development (R&D)
-        </li>
-        <li class="mb-3">
-            <i class="fas fa-check-circle" style="color: #3F9C13;"></i> Software Defined Radio (SDR)
-        </li>
-    </ul>
+
+
+
+
+
+        <!-- Footer Section -->
+        <footer class="text-white py-5" style="background-color: #2c3e50;">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo and Name -->
+                    <div class="col-md-4 mb-4 text-center text-md-start">
+                        <img src="https://2tocsolutions.ng/assets/logo-main.png" alt="Company Logo" style="height: 50px;" class="mb-2">
+                        <h5 class="mt-2">2TOCSOLUTIONS LTD.</h5>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="col-md-4 mb-4 text-center">
+                        <h5>Contact Us</h5>
+                        <p>Email: <a href="info@2tocsolutions.com"
+                                class="text-white text-decoration-none">info@2tocsolutions.com</a></p>
+                        <p>Call: <a href="tel:+1234567890" class="text-white text-decoration-none">+234 809 994 9994</a>
+                        </p>
+                        <p>Address:Abuja: Suite 2, House 5, Rahinna Close, Aco Estate, Airport Road Abuja.</p>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="col-md-4 mb-4 text-center text-md-end">
+                        <h5>Follow Us</h5>
+                        <a href="https://facebook.com" target="_blank" class="text-white mx-2"><i class="bi bi-facebook"
+                                style="font-size: 1.5rem;"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="text-white mx-2"><i class="bi bi-youtube"
+                                style="font-size: 1.5rem;"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="text-white mx-2"><i
+                                class="bi bi-instagram" style="font-size: 1.5rem;"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="text-white mx-2"><i class="bi bi-twitter"
+                                style="font-size: 1.5rem;"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="text-white mx-2"><i class="bi bi-linkedin"
+                                style="font-size: 1.5rem;"></i></a>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <hr class="border-light">
+
+                <div class="row align-items-center">
+                    <!-- Copyright -->
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 Company Name. All rights reserved.</p>
+                    </div>
+
+                    <!-- Staff Login Button -->
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="/staff-login" class="btn btn-outline-light btn-sm">Staff Login</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+ <!-- Contact Modal -->
+ <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <form>
+             <div class="modal-body">
+                 <!-- Contact Form -->
+                 <div class="mb-3">
+                     <label for="name" class="form-label">Name</label>
+                     <input type="text" class="form-control" id="name" placeholder="Your Name">
+                 </div>
+                 <div class="mb-3">
+                     <label for="email" class="form-label">Email</label>
+                     <input type="email" class="form-control" id="email" placeholder="Your Email">
+                 </div>
+                 <div class="mb-3">
+                     <label for="message" class="form-label">Message</label>
+                     <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+                 </div>
+             </div>
+             <div class="modal-footer">
+                 <button type="submit" class="btn btn-primary">Send Mail</button>
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             </div>
+         </form>
+     </div>
+ </div>
 </div>
 
 
 
-    <!-- Partners Section -->
-    <div class="container my-5">
-        <h2 class="text-center mb-4" style="color: #3F9C13;">Our Partners</h2>
-        <div id="logoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <img src="asset/cbn.png" alt="Partner 1" class="partner-logo">
-                        <img src="asset/client-12.png" alt="Partner 2" class="partner-logo">
-                        <img src="asset/client-13.png" alt="Partner 3" class="partner-logo">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <img src="asset/client-14.png" alt="Partner 4" class="partner-logo">
-                        <img src="asset/client-15.png" alt="Partner 5" class="partner-logo">
-                        <img src="asset/client-16.png" alt="Partner 6" class="partner-logo">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <img src="asset/client-17.png" alt="Partner 7" class="partner-logo">
-                        <img src="asset/client-18.png" alt="Partner 8" class="partner-logo">
-                        <img src="asset/client-19.png" alt="Partner 9" class="partner-logo">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <img src="asset/client-4.png" alt="Partner 7" class="partner-logo">
-                        <img src="asset/client-5.png" alt="Partner 8" class="partner-logo">
-                        <img src="asset/client-6.png" alt="Partner 9" class="partner-logo">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <img src="asset/client-7.png" alt="Partner 7" class="partner-logo">
-                        <img src="asset/client-8.png" alt="Partner 8" class="partner-logo">
-                        <img src="asset/client-36.png" alt="Partner 9" class="partner-logo">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <img src="asset/client-37.png" alt="Partner 7" class="partner-logo">
-                        <img src="asset/client-38.png" alt="Partner 8" class="partner-logo">
-                        <img src="asset/client-39.png" alt="Partner 9" class="partner-logo">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Certification Section -->
-    <div class="certification-section py-5 mt-3" style="background-color: #f8f9fa;">
-        <div class="container text-center">
-            <h2 class="mb-4" style="color: #3F9C13;">Our Certifications</h2>
-            <div class="row justify-content-center align-items-center">
-                <div class="col-6 col-md-3 mb-4">
-                    <img src="asset/interior-1.png" alt="Certification 1" class="img-fluid">
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <img src="asset/client-2.png" alt="Certification 2" class="img-fluid">
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <img src="asset/nitda.jpg" alt="Certification 3" class="img-fluid">
-                </div>
-                <div class="col-6 col-md-3 mb-4">
-                    <img src="asset/client-3.png" alt="Certification 4" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-white py-5" style="background-color: #2c3e50;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h5>About Us</h5>
-                    <p>2TOC Solutions is a leading technology company providing innovative solutions for businesses.</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h5>Contact Info</h5>
-                    <p>
-                        <i class="bi bi-geo-alt"></i> Suite 2, House 5, Rahinna Close, Aco Estate, Airport Road Abuja<br>
-                        <i class="bi bi-envelope"></i> info@2tocsolutions.com<br>
-                        <i class="bi bi-phone"></i> +234 809 994 9994
-                    </p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h5>Follow Us</h5>
-                    <div class="social-links">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <p class="mb-0">&copy; 2024 2TOC Solutions. All rights reserved.</p>
-                <a href="/staff-login" class="btn btn-outline-light btn-sm mt-2">Staff Login</a>
-            </div>
-        </div>
-    </footer>
-
-
-
-
-    <!-- Contact Modal -->
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <!-- Contact Form -->
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Send Mail</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 
 
 
 
-    <!-- Add this script for continuous carousel sliding -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize all carousels
-            var carousels = document.querySelectorAll('.carousel');
-            carousels.forEach(function(carousel) {
-                new bootstrap.Carousel(carousel, {
-                    interval: 3000,
-                    ride: 'carousel',
-                    wrap: true
-                });
-            });
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.sliding-card-wrapper .card').length / 2; // Two cards per slide
+        const slidingWrapper = document.querySelector('.sliding-card-wrapper');
 
-            // Specific handling for logo carousel
-            var logoCarousel = document.getElementById('logoCarousel');
-            if (logoCarousel) {
-                new bootstrap.Carousel(logoCarousel, {
-                    interval: 2000,
-                    ride: 'carousel',
-                    wrap: true
-                });
+        function autoSlide() {
+            currentSlide++;
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
             }
-        });
-    </script>
+            slidingWrapper.style.transform = `translateY(-${currentSlide * 50}%)`; // Move 50% for two cards vertically
+        }
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        setInterval(autoSlide, 3000); // Change slide every 3 seconds
+    </script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
